@@ -1,0 +1,144 @@
+
+INSTRUCCIONES PARA EJECUTAR LOS PLANIFICADORES
+==============================================
+
+
+FF ó METRIC-FF (http://fai.cs.uni-saarland.de/hoffmann/metric-ff.html)
+
+
+Probar fichero Metric-FF ejecutable 
+
+> ./metric_ff -o <domain.pddl> -f <problem.pddl>
+
+
+o bien compilar el código fuente de Metric-FF (basta con hacer $make).
+
+
+En el caso de que no funcione en la versión de Linux utilizada, se muestran otras opciones:
+
+(1) Descargar Metric-FF-v2.1.tgz y compilar igualmente con $make. En este caso, el fichero ejectuable se llama ff y hay que ejecturalo así:
+
+> ./ff -o <domain.pddl> -f <problem.pddl> -s 0
+
+donde -s 0 significa que el planificador se ejecutará con la opción de búsqueda (search) por defecto (hill climbing + BFS).
+
+
+(2) Descargar FF-v2.3.tgz y compilar igualmente con $make. En este caso, el fichero ejecutable es ff y hay que ejecutarlo así:
+
+> ./ff -o <domain.pddl> -f <problem.pddl>
+
+
+FF se puede ejecutar con las opciones -E -h 0 (la primera desactiva el hill climbing, la segunda pone la heurística a 0, de forma que FF se ejecuta en modo óptimo con estas dos opciones).
+
+
+============================================================================================
+
+
+LPG-td (http://zeus.ing.unibs.it/lpg/)
+
+Probar primero la versión lpg_MAX_PLAN_LENGTH, una versión de LPG compilada con tamaños más grandes de arrays. La contraseña del archivo zip es 1234.
+
+> ./lpg-td-1.0 -o <domain.pddl> 
+               -f <problem.pddl> 
+               -n <number>    specifies the desired number of solutions
+               -out <fich_solution>   ;; fichero para la solución
+
+
+Si se quiere minimizar el número de timesteps hay que usar además la etiqueta -timesteps en detrimento del número de acciones.
+
+
+También se puede probar la versión lpg-td (ejecutable LPG-td 1.4).
+
+
+
+============================================================================================
+
+OPTIC planner
+
+Probar primero la versión  optic-clp (compilado) en PoliformaT
+
+También se puede probar la versión casi-compilada optic-clp (almost-compiled binary of OPTIC for 32-bit Linux). En este casoo, bajar el fichero optic-clp.tar.bz2 o bien de la página https://sourceforge.net/projects/tsgp/   
+
+El fichero está compilado pero hay que 'linkarlo' con las librerías de CLP. Asegurarse que vuestra versión de Linux contiene los paquetes indicados en la página de OPTIC.
+
+PAQUETES: CMAKE, PERL, BISON, FLEX
+
+PARA COMPILAR (leer el fichero README): 
+1) RUN-CMAKE-RELEASE 
+2) BUILD-RELEASE (si da error, entrar en el directorio y ejecutar make)
+
+Si estáis en una máquina de 64 bits, tened en cuenta las instrucciones indicadas en la sección 'Users of 64-bit Machines'.  
+
+------------------------------------------
+
+Ejecución OPTIC
+
+> ./optic-clp <domain.pddl> <problem.pddl>
+
+
+OPTIC es un planficador de orden parcial. Devuelve una primera solución (determinista) y luego intenta mejorarla. Ejemplo:
+
+
+; No metric specified - using makespan
+
+; Plan found with metric 0.004
+; States evaluated so far: 23
+; States pruned based on pre-heuristic cost lower bound: 0
+; Time 0.00
+0.000: (lift hoist0 crate1 pallet0 depot0)  [0.001]
+0.000: (drive truck0 distributor1 distributor0)  [0.001]
+0.000: (lift hoist1 crate0 pallet1 distributor0)  [0.001]
+0.001: (load hoist0 crate1 truck1 depot0)  [0.001]
+0.001: (load hoist1 crate0 truck0 distributor0)  [0.001]
+0.002: (drive truck1 depot0 distributor0)  [0.001]
+0.002: (drive truck0 distributor0 distributor1)  [0.001]
+0.003: (unload hoist2 crate0 truck0 distributor1)  [0.001]
+0.003: (unload hoist1 crate1 truck1 distributor0)  [0.001]
+0.004: (drop hoist2 crate0 pallet2 distributor1)  [0.001]
+0.004: (drop hoist1 crate1 pallet1 distributor0)  [0.001]
+
+ * All goal deadlines now no later than 0.004
+
+
+PLAN DE 11 ACCIONES ENCONTRADO EN 4 TIME STEPS. NOTESE QUE OPTIC DEVUELVE LOS TIME STEPS COMO 0.000 0.001 PORQUE ES UN PLANIFICADOR TEMPORAL Y TIENE LA SALIDA PREPARADA PARA PLANES TEMPORALES. PARA FIJARSE EN EL NUMERO DE TIME STEPS, HAY QUE FIJARSE EN EL ÚLTIMO DIGITO DEL TIME.
+
+A PARTIR DEL PRIMER PLAN, SE FIJA EN EL NUMERO DE TIME STEPS (4 EN ESTE CASO) E INTENTA ENCONTRAR OTRO PLAN EN MENOS DE 4 TIME STEPS.
+
+
+Resorting to best-first search
+Running WA* with W = 5.000, not restarting with goal states
+b (9.000 | 0.000)b (8.000 | 0.001)b (7.000 | 0.002)b (5.000 | 0.002)b (4.000 | 0.002)b (3.000 | 0.003)b (2.000 | 0.003)b (1.000 | 0.004)
+Problem Unsolvable
+;;;; Solution Found
+; States evaluated: 120430
+; Cost: 0.004
+; Time 53.85
+0.000: (lift hoist0 crate1 pallet0 depot0)  [0.001]
+0.000: (drive truck0 distributor1 distributor0)  [0.001]
+0.000: (lift hoist1 crate0 pallet1 distributor0)  [0.001]
+0.001: (load hoist0 crate1 truck1 depot0)  [0.001]
+0.001: (load hoist1 crate0 truck0 distributor0)  [0.001]
+0.002: (drive truck1 depot0 distributor0)  [0.001]
+0.002: (drive truck0 distributor0 distributor1)  [0.001]
+0.003: (unload hoist2 crate0 truck0 distributor1)  [0.001]
+0.003: (unload hoist1 crate1 truck1 distributor0)  [0.001]
+0.004: (drop hoist2 crate0 pallet2 distributor1)  [0.001]
+0.004: (drop hoist1 crate1 pallet1 distributor0)  [0.001]
+
+
+ACTIVA BEST-FIRST SEARCH. NO ENCUENTRA OTRA SOLUCIÓN, POR ESO DICE PROBLEM UNSOLVABLE Y DEVUELVE LA MISMA SOLUCIÓN.
+
+
+=============================================================================
+
+VAL (herramienta para validar planes clásicos)
+
+> ./validate -v <domain.pddl> <problem.pddl> <plan_file>
+
+https://github.com/KCL-Planning/VAL
+
+
+
+
+
+

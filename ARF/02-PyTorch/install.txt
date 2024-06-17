@@ -1,0 +1,30 @@
+PyTorch installation instructions for Linux
+
+1. Download Anaconda 3 version
+
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+(It is also available in your personal virtual machine, in Descargas folder)
+
+2. Install Anaconda 3
+
+sh Miniconda3-latest-Linux-x86_64.sh
+
+(Choose installation path INSPATH)
+
+3. Update paths
+
+.bashrc is automatically changed if conda init answer is "yes"; otherwise:
+
+export PATH=INSPATH/bin:$PATH
+export PYTHONPATH=INSPATH/lib/python3.11/site-packages/
+
+Where INSPATH is the path you told the installer where miniconda3 is to be installed.
+
+4. Install PyTorch: go to PyTorch web (https://pytorch.org) and follow the 
+instructions according your system
+
+5. Install librosa for audio processing (practical task)
+
+conda install -c conda-forge librosa
+

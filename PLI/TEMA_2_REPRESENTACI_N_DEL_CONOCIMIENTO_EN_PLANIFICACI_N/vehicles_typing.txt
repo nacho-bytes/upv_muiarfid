@@ -1,0 +1,30 @@
+
+DOMINIO EJEMPLO
+
+(define (domain EJEMPLO)
+(:requirements :strips :typing :equality :negative-preconditions)
+
+(:types   place locatable - object
+	  house office - place
+          person box vehicle - locatable
+          car truck van - vehicle)
+
+(:predicates (at ?x - locatable ?p - place)
+             (in ?o - (either person box) ?v - vehicle))
+
+
+===============================================
+
+PROBLEMA
+
+(define (problem problem_1) 
+(:domain EJEMPLO)
+(:objects
+	car1 car2 - car
+        truck1 truck2 truck3 - truck
+        van1 - van
+        house1 house2 - house
+        off1 off2 off3 - office
+        john mary peter - person
+        box1 box2 box3 - box)
+        
