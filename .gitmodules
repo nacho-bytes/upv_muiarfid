@@ -1,0 +1,30 @@
+[submodule "GPC/gpc_projects"]
+	path = GPC/gpc_projects
+	url = https://github.com/nacho-bytes/gpc_projects.git
+[submodule "RFA/rfa_projects"]
+	path = RFA/rfa_projects
+	url = https://github.com/nacho-bytes/rfa_projects.git
+[submodule "LC/lc_projects"]
+	path = LC/lc_projects
+	url = https://github.com/nacho-bytes/lc_projects.git
+[submodule "TIA/tia_project"]
+	path = TIA/tia_project
+	url = https://github.com/nacho-bytes/tia_project.git
+[submodule "PLI/pli_project"]
+	path = PLI/pli_project
+	url = https://github.com/nacho-bytes/pli_project.git
+[submodule "APL/alc_exist"]
+	path = APL/alc_exist
+	url = https://github.com/nacho-bytes/alc_exist.git
+[submodule "SCAR/scar_project"]
+	path = SCAR/scar_project
+	url = https://github.com/nacho-bytes/scar_project.git
+[submodule "APL/alc_pan"]
+	path = APL/alc_pan
+	url = https://github.com/nacho-bytes/alc_pan.git
+[submodule "ARF/arf_project"]
+	path = ARF/arf_project
+	url = https://github.com/nacho-bytes/arf_project.git
+[submodule "RAH/rah_projects"]
+	path = RAH/rah_projects
+	url = https://github.com/nacho-bytes/rah_projects.git
